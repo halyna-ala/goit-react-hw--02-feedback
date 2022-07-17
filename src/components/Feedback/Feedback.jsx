@@ -5,19 +5,17 @@ import styles from './Feedback.module.css';
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <ul className={styles.list}>
-      {Object.keys(options).map(btnName => {
-        return (
-          <li className={styles.item} key={btnName}>
+      {options.map(option => (
+        <li className={styles.item} key={option}>
             <button
               className={styles.button}
               type="button"
-              onClick={onLeaveFeedback}
+              onClick={() => onLeaveFeedback(option)}
             >
-              {btnName}
+              {option}
             </button>
           </li>
-        );
-      })}
+        ))}
     </ul>
   );
 };
@@ -29,3 +27,17 @@ FeedbackOptions.propTypes = {
 };
 
 export default FeedbackOptions;
+
+// {Object.keys(options).map(btnName => {
+//   return (
+//     <li className={styles.item} key={btnName}>
+//       <button
+//         className={styles.button}
+//         type="button"
+//         onClick={onLeaveFeedback}
+//       >
+//         {btnName}
+//       </button>
+//     </li>
+//   );
+// }

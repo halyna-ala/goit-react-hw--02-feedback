@@ -3,13 +3,19 @@ import Notification from '../Notification/Notification';
 
 import styles from './Statistics.module.css';
 
-const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
+const Statistics = ({ 
+  good, 
+  neutral, 
+  bad, 
+  total, 
+  positivePercentage }) => {
   const totalFeedback = total();
   const positiveValue = positivePercentage();
 
   return (
-    <div>
-      {!!totalFeedback ? (
+    <div eventType={positivePercentage}>
+      {!totalFeedback && <Notification message="No feedback given" /> }
+      {totalFeedback > 0 && (
         <ul>
           <li className={styles.item}>
             <p>
@@ -38,9 +44,7 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
             </p>
           </li>
         </ul>
-      ) : (
-        <Notification message={'No feedback given'} />
-      )}
+      )  }
     </div>
   );
 };
@@ -49,8 +53,8 @@ Statistics.propTypes = {
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
-  total: PropTypes.func.isRequired,
-  positivePercentage: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
 };
 
 export default Statistics;
